@@ -1,11 +1,13 @@
 "use client";
 
 import { useAppSelector } from "@/app/hooks/reduxHooks"; 
+import { useQuery, useQueryClient } from '@tanstack/react-query';
   
 import { Box, Typography } from "@mui/material";
 
 export default function ScoreBoard() {
   const status = useAppSelector((state) => state.status.value);
+  const queryClient = useQueryClient();
 
   const baseValue = status === "off" ? 0 : 7;
   const step1Value = status === "off" ? 0 : 7;

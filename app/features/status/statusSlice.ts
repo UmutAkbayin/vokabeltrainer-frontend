@@ -6,7 +6,7 @@ export interface StatusState {
 }
 
 const initialState: StatusState = {
-  value: 'off'
+  value: 'off',
 };
 
 export const statusSlice = createSlice({

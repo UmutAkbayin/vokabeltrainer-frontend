@@ -1,7 +1,7 @@
-import App from "@/app/components/App"
+import StateProvider from "@/app/components/StateProvider"
 
 export default function Home() {
   return (
-    <App />
+    <StateProvider />
   )
 }

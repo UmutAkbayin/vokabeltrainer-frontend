@@ -1,34 +1,108 @@
 "use client";
 
 import React from 'react';
-import {store} from '@/app/store';
-import { Provider } from 'react-redux';
 
-import styles from './Main.module.css';
+
+import styles from '@/app/styles/App.module.css';
 
 import Settings from '@/app/components/Settings';
 import ScoreBoard from './ScoreBoard';
 import LanguageBoard from './LanguageBoard';
 import AnswerInput from './AnswerInput';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ButtonsComponent from './ButtonsComponent';
+import { useQuery } from '@tanstack/react-query';
+import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
+import { fetchVocabularies } from '@/app/services/fetchVocabularies';
+import { setStatus } from '@/app/features/status/statusSlice';
+import { setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
 
-const queryClient = new QueryClient();
+import { Box, Button } from '@mui/material';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import SendIcon from '@mui/icons-material/Send';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
 
 function App() {
+
+  const status = useAppSelector((state) => state.status.value);
+  const vocabularies = useAppSelector((state) => state.vocabularies.value);
+  const dispatch = useAppDispatch();
+
+  const query =
+    useQuery({
+      queryKey: ['vocabularies'],
+      queryFn: () => fetchVocabularies(7),
+      enabled: false,
+    });
+
+  const handleFetch = () => {
+    query.refetch();
+    dispatch(setStatus("on"));
+    dispatch(setVocabularies(query.data));
+  }
+
+  const handleAssertion = () => {
+
+  }
+
+  const handleNext = () => {
+
+  }
+
+  console.log(vocabularies);
+
   return (
     <main className={styles.main}>
       <h1>Vocabulary Trainer</h1>
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <Settings />
-          <ScoreBoard />
-          <LanguageBoard mode="englishToGerman" flag="us" />
-          <LanguageBoard mode="englishToGerman" flag="germany" />
-          <AnswerInput />
-          <ButtonsComponent />
-          </QueryClientProvider>
-        </Provider>
+      <Settings />
+      <ScoreBoard />
+      <LanguageBoard role="input" />
+      <LanguageBoard role="output" />
+      <AnswerInput />
+      <Box sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+      }}>
+        <Button
+          className='btn-secondary'
+          variant="contained"
+          size="large"
+          startIcon={<RestartAltIcon />}
+          sx={{
+            backgroundColor: "var(--light-gray)",
+            color: "var(--primary-color)",
+            "&:hover": {
+              color: "white",
+            }
+          }}
+        >
+          Reset
+        </Button>
+        <Box sx={{ 
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+          fontSize: "1.3rem",
+  }}>
+    { status === "off" && null}
+    {/* Correct Answer<CheckCircleIcon
+    fontSize="large"
+    color="success"
+    /> */}
+        </Box>
+        <Button
+          variant="contained"
+          size="large"
+          startIcon={<SendIcon />}
+          sx={{ 
+            backgroundColor: "var(--secondary-light)",
+          }}
+          onClick={handleFetch}
+        >
+          {status === "off" ? "Start" : "Submit"}
+        </Button>
+        </Box>
     </main>
   )
 }

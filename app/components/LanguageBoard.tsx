@@ -9,12 +9,13 @@ import germanyFlag from '../../public/germany.png';
 import usFlag from '../../public/united-states.png';
 
 interface LanguageBoardProps {
-  mode: string;
-  flag: string;
+  role: string;
 }
 
-function LanguageBoard({ mode, flag }: LanguageBoardProps) {
-  const status = useAppSelector((state) => state.status.value);
+function LanguageBoard({ role }: LanguageBoardProps) {
+  const mode = useAppSelector((state) => state.mode.value);
+
+  const isUSA = role === "input" && mode === "englishToGerman"
 
   return (
     <Box sx={{
@@ -23,18 +24,22 @@ function LanguageBoard({ mode, flag }: LanguageBoardProps) {
       display: "flex",
       alignItems: "center",
     }}>
-      <Image
-        src={flag === "germany" ? germanyFlag : usFlag}
-        width={75}
-        height={75}
-        alt="Germany flag"
-      />
+      {
+        mode === "" ? null : (
+        <Image
+          src={isUSA ? usFlag : germanyFlag}
+          width={75}
+          height={75}
+          alt={isUSA ? "USA flag" : "Germany flag"}
+        />
+        )
+      }
       <Typography sx={{
         marginLeft: "auto",
         marginRight: "auto",
         paddingRight: "100px",
       }}>
-        {status === "off" && null}
+        {}
       </Typography>
     </Box>
   )
