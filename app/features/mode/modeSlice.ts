@@ -3,7 +3,7 @@ import type { RootState } from '@/app/store';
 
 // Define a type for the slice state
 export interface ModeState {
-  value: string,
+  value: string;
 }
 
 // Define the initial state using that type
@@ -23,5 +23,6 @@ export const modeSlice = createSlice({
 });
 
 export const { setMode } = modeSlice.actions;
-
+// Other code such as selectors can use the imported `RootState` type
+export const selectMode = (state: RootState) => state.mode.value
 export default modeSlice.reducer;

@@ -26,7 +26,7 @@ function App() {
           <LanguageBoard mode="englishToGerman" flag="us" />
           <LanguageBoard mode="englishToGerman" flag="germany" />
           <AnswerInput />
-         <ButtonsComponent />
+          <ButtonsComponent />
           </QueryClientProvider>
         </Provider>
     </main>
