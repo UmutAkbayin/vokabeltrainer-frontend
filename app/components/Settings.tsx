@@ -15,8 +15,8 @@ import {
 } from '@mui/material';
 
 export default function Settings() {
-  const amount = useAppSelector(state => state.amount.value);
-  const mode = useAppSelector(state => state.mode.value);
+  const amount = useAppSelector((state) => state.amount.value);
+  const mode = useAppSelector((state) => state.mode.value);
   const dispatch = useAppDispatch();
 
   return (

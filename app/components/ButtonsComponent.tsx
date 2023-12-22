@@ -1,11 +1,16 @@
+"use client";
+
 import React from 'react';
+import { useAppSelector } from "@/app/hooks/reduxHooks"; 
+
 import { Box, Button } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-
 function ButtonsComponent() {
+  const status = useAppSelector((state) => state.status.value);
+
   return (
      <Box sx={{
             display: "flex",
@@ -33,11 +38,12 @@ function ButtonsComponent() {
               alignItems: "center",
               gap: "0.5rem",
               fontSize: "1.3rem",
-            }}>
-              Correct Answer<CheckCircleIcon
-                fontSize="large"
-                color="success"
-              />
+      }}>
+        { status === "off" && null}
+        {/* Correct Answer<CheckCircleIcon
+        fontSize="large"
+        color="success"
+        /> */}
             </Box>
             <Button
               variant="contained"
@@ -47,7 +53,7 @@ function ButtonsComponent() {
                 backgroundColor: "var(--secondary-light)",
               }}
             >
-              Submit
+              {status === "off" ? "Start" : "Submit"}
             </Button>
             </Box>
   )

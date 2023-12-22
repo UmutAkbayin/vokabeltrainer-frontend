@@ -1,8 +1,17 @@
 "use client";
 
+import { useAppSelector } from "@/app/hooks/reduxHooks"; 
+  
 import { Box, Typography } from "@mui/material";
 
 export default function ScoreBoard() {
+  const status = useAppSelector((state) => state.status.value);
+
+  const baseValue = status === "off" ? 0 : 7;
+  const step1Value = status === "off" ? 0 : 7;
+  const step2Value = status === "off" ? 0 : 7;
+  const doneValue = status === "off" ? 0 : 7;
+
   return (
     <Box sx={{
       width: "100%",
@@ -25,7 +34,7 @@ export default function ScoreBoard() {
           fontSize: "2.5rem",
           textAlign: "center",
         }}>
-          7
+          {baseValue}
         </Typography>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -41,7 +50,7 @@ export default function ScoreBoard() {
           fontSize: "2.5rem",
           textAlign: "center",
         }}>
-          0
+          {step1Value}
         </Typography>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -50,14 +59,14 @@ export default function ScoreBoard() {
           fontSize: "1.25rem",
           textTransform: "uppercase",
         }}>
-          Step 2
+          {step2Value}
         </Typography>
         <Typography sx={{
           color: "var(--primary-color)",
           fontSize: "2.5rem",
           textAlign: "center",
         }}>
-          0
+          {doneValue}
         </Typography>
       </Box>
 <Box sx={{ display: "flex", flexDirection: "column" }}>

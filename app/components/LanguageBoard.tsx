@@ -1,6 +1,8 @@
 "use client";
 
 import React from 'react';
+import { useAppSelector } from "@/app/hooks/reduxHooks"; 
+
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import germanyFlag from '../../public/germany.png';
@@ -11,7 +13,9 @@ interface LanguageBoardProps {
   flag: string;
 }
 
-function LanguageBoard({ mode, flag } : LanguageBoardProps) {
+function LanguageBoard({ mode, flag }: LanguageBoardProps) {
+  const status = useAppSelector((state) => state.status.value);
+
   return (
     <Box sx={{
       width: "100%",
@@ -30,7 +34,7 @@ function LanguageBoard({ mode, flag } : LanguageBoardProps) {
         marginRight: "auto",
         paddingRight: "100px",
       }}>
-        Some text
+        {status === "off" && null}
       </Typography>
     </Box>
   )
