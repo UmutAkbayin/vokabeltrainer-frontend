@@ -1,6 +1,10 @@
 "use client";
 
 import React from 'react';
+import { useAppSelector, useAppDispatch } from '@/app/hooks/reduxHooks';
+import { setAmount } from '@/app/features/amount/amountSlice';
+import { setMode } from '@/app/features/mode/modeSlice';
+
 import {
   FormControl,
   InputLabel,
@@ -8,15 +12,13 @@ import {
   MenuItem,
   Box,
   TextField,
-  InputAdornment,
 } from '@mui/material';
 
 export default function Settings() {
-  const [mode, setMode] = React.useState<string>("");
+  const amount = useAppSelector(state => state.amount.value);
+  const mode = useAppSelector(state => state.mode.value);
+  const dispatch = useAppDispatch();
 
-  function handleModeChange() {
-    return null;
-  }
   return (
     <Box sx={{
       width: "100%",
@@ -30,8 +32,8 @@ export default function Settings() {
           labelId="mode-select-label"
           id="mode-select"
           value={mode}
+          onChange={(e) => dispatch(setMode(e.target.value))}
           label="Mode"
-          onChange={handleModeChange}
           sx={{ width: "295px", }}
           size="small"
         >
@@ -43,6 +45,8 @@ export default function Settings() {
         type="number"
         variant="outlined"
         size="small"
+        value={amount}
+        onChange={(e) => dispatch(setAmount(parseInt(e.target.value)))}
         sx={{ width: "120px" }}
       />
     </Box>
