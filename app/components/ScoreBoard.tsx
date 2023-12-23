@@ -61,14 +61,14 @@ export default function ScoreBoard() {
           fontSize: "1.25rem",
           textTransform: "uppercase",
         }}>
-          {step2Value}
+          Step 2
         </Typography>
         <Typography sx={{
           color: "var(--primary-color)",
           fontSize: "2.5rem",
           textAlign: "center",
         }}>
-          {doneValue}
+          {step2Value}
         </Typography>
       </Box>
 <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -84,7 +84,7 @@ export default function ScoreBoard() {
           fontSize: "2.5rem",
           textAlign: "center",
         }}>
-          0
+          {doneValue}
         </Typography>
       </Box>
     </Box>

@@ -27,7 +27,7 @@ export const vocabulariesSlice = createSlice({
   initialState,
   reducers: {
     setVocabularies: (state, action: PayloadAction<RawVocabulary[]>) => {
-      state.value = action.payload.map((voc) => {
+      state.value = action.payload?.map((voc) => {
         const newVoc = {
           ...voc,
           step: 0,
