@@ -10,10 +10,7 @@ import ScoreBoard from './ScoreBoard';
 import LanguageBoard from './LanguageBoard';
 import AnswerInput from './AnswerInput';
 import { useQuery } from '@tanstack/react-query';
-import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
 import { fetchVocabularies } from '@/app/services/fetchVocabularies';
-import { setStatus } from '@/app/features/status/statusSlice';
-import { setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
 
 import { Box, Button } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';

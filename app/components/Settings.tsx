@@ -1,9 +1,6 @@
 "use client";
 
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '@/app/hooks/reduxHooks';
-import { setAmount } from '@/app/features/amount/amountSlice';
-import { setMode } from '@/app/features/mode/modeSlice';
 
 import {
   FormControl,
@@ -15,9 +12,6 @@ import {
 } from '@mui/material';
 
 export default function Settings() {
-  const amount = useAppSelector((state) => state.amount.value);
-  const mode = useAppSelector((state) => state.mode.value);
-  const dispatch = useAppDispatch();
 
   return (
     <Box sx={{
@@ -31,8 +25,8 @@ export default function Settings() {
         <Select
           labelId="mode-select-label"
           id="mode-select"
-          value={mode}
-          onChange={(e) => dispatch(setMode(e.target.value))}
+          value=""
+          onChange={() => null}
           label="Mode"
           sx={{ width: "295px", }}
           size="small"
@@ -45,8 +39,8 @@ export default function Settings() {
         type="number"
         variant="outlined"
         size="small"
-        value={amount}
-        onChange={(e) => dispatch(setAmount(parseInt(e.target.value)))}
+        value=""
+        onChange={() => null}
         sx={{ width: "120px" }}
       />
     </Box>

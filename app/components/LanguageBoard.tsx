@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import { useAppSelector } from "@/app/hooks/reduxHooks"; 
 
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
@@ -13,7 +12,6 @@ interface LanguageBoardProps {
 }
 
 function LanguageBoard({ role }: LanguageBoardProps) {
-  const mode = useAppSelector((state) => state.mode.value);
 
   const isUSA = role === "input" && mode === "englishToGerman"
 
