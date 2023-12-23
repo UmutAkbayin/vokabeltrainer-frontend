@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 
 export default function ScoreBoard() {
   const queryClient = useQueryClient();
+  const status = "off";
 
   const baseValue = status === "off" ? 0 : 7;
   const step1Value = status === "off" ? 0 : 7;

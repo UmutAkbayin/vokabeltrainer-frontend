@@ -20,10 +20,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function App() {
 
-  const status = useAppSelector((state) => state.status.value);
-  const mode = useAppSelector((state) => state.mode.value);
-  const vocabularies = useAppSelector((state) => state.vocabularies.value);
-  const dispatch = useAppDispatch();
+  const status = "off";
+  const mode = "";
 
   const query =
     useQuery({
@@ -35,8 +33,6 @@ function App() {
   const handleFetch = () => {
     if (mode !== "") {
        query.refetch();
-       dispatch(setStatus("on"));
-       dispatch(setVocabularies(query.data));
     } else {
       console.log("choose a mode please")
     }

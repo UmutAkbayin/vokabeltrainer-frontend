@@ -12,7 +12,7 @@ interface LanguageBoardProps {
 }
 
 function LanguageBoard({ role }: LanguageBoardProps) {
-
+  const mode = "englishToGerman";
   const isUSA = role === "input" && mode === "englishToGerman"
 
   return (
