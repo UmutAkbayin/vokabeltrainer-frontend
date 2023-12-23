@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app/store';
 
-type RawVocabulary = {
-  id: string;
-  englishVocabulary: string;
-  germanVocabularies: string[];
-}
-
 type Vocabulary = {
     id: string;
     englishVocabulary: string;
@@ -26,7 +20,7 @@ export const vocabulariesSlice = createSlice({
   name: 'vocabularies',
   initialState,
   reducers: {
-    setVocabularies: (state, action: PayloadAction<RawVocabulary[]>) => {
+    setVocabularies: (state, action: PayloadAction<Vocabulary[]>) => {
       state.value = action.payload?.map((voc) => {
         const newVoc = {
           ...voc,

@@ -1,18 +1,22 @@
 "use client";
 
 import { useAppSelector } from "@/app/hooks/reduxHooks"; 
-import { useQuery, useQueryClient } from '@tanstack/react-query';
   
 import { Box, Typography } from "@mui/material";
 
+
 export default function ScoreBoard() {
   const status = useAppSelector((state) => state.status.value);
-  const queryClient = useQueryClient();
-
-  const baseValue = status === "off" ? 0 : 7;
-  const step1Value = status === "off" ? 0 : 7;
-  const step2Value = status === "off" ? 0 : 7;
-  const doneValue = status === "off" ? 0 : 7;
+  const vocabularies = useAppSelector((state) => state.vocabularies.value);
+  
+  const baseValue = status === "off" ? 0
+    : vocabularies.filter((voc) => voc.step === 0).length;
+  const step1Value = status === "off" ? 0
+    : vocabularies.filter((voc) => voc.step === 1).length;
+  const step2Value = status === "off" ? 0
+    : vocabularies.filter((voc) => voc.step === 2).length;
+  const doneValue = status === "off" ? 0
+    : vocabularies.filter((voc) => voc.step === 3).length;
 
   return (
     <Box sx={{

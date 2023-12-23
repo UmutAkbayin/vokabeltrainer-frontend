@@ -25,24 +25,27 @@ function App() {
 
   const status = useAppSelector((state) => state.status.value);
   const mode = useAppSelector((state) => state.mode.value);
-  const vocabularies = useAppSelector((state) => state.vocabularies.value);
+  const amount = useAppSelector((state) => state.amount.value);
   const dispatch = useAppDispatch();
 
   const query =
     useQuery({
       queryKey: ['vocabularies'],
-      queryFn: () => fetchVocabularies(7),
+      queryFn: () => fetchVocabularies(amount),
       enabled: false,
     });
-
+  
+  React.useEffect(() => {
+  if (mode !== "") {
+      dispatch(setStatus("on"));
+      dispatch(setVocabularies(query.data));
+  } else {
+    console.log("choose a mode please")
+  }
+}, [query.data]);
+  
   const handleFetch = () => {
-    if (mode !== "") {
-       query.refetch();
-       dispatch(setStatus("on"));
-       dispatch(setVocabularies(query.data));
-    } else {
-      console.log("choose a mode please")
-    }
+    query.refetch();
   }
 
   const handleAssertion = () => {
@@ -52,6 +55,7 @@ function App() {
   const handleNext = () => {
 
   }
+
 
   return (
     <main className={styles.main}>
