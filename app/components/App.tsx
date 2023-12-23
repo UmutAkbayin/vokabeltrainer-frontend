@@ -24,6 +24,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 function App() {
 
   const status = useAppSelector((state) => state.status.value);
+  const mode = useAppSelector((state) => state.mode.value);
   const vocabularies = useAppSelector((state) => state.vocabularies.value);
   const dispatch = useAppDispatch();
 
@@ -35,9 +36,13 @@ function App() {
     });
 
   const handleFetch = () => {
-    query.refetch();
-    dispatch(setStatus("on"));
-    dispatch(setVocabularies(query.data));
+    if (mode !== "") {
+       query.refetch();
+       dispatch(setStatus("on"));
+       dispatch(setVocabularies(query.data));
+    } else {
+      console.log("choose a mode please")
+    }
   }
 
   const handleAssertion = () => {
@@ -47,8 +52,6 @@ function App() {
   const handleNext = () => {
 
   }
-
-  console.log(vocabularies);
 
   return (
     <main className={styles.main}>
