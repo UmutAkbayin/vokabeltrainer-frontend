@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useAppSelector } from "@/app/hooks/reduxHooks"; 
-
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import germanyFlag from '../../public/germany.png';
@@ -13,9 +12,10 @@ interface LanguageBoardProps {
 }
 
 function LanguageBoard({ role }: LanguageBoardProps) {
-  const mode = useAppSelector((state) => state.mode.value);
+  const direction = useAppSelector((state) => state.direction.value);
+  const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
 
-  const isUSA = role === "input" && mode === "englishToGerman"
+  const isUSA = role === "input" && direction === "englishToGerman";
 
   return (
     <Box sx={{
@@ -25,7 +25,7 @@ function LanguageBoard({ role }: LanguageBoardProps) {
       alignItems: "center",
     }}>
       {
-        mode === "" ? null : (
+        direction === "" ? null : (
         <Image
           src={isUSA ? usFlag : germanyFlag}
           width={75}
@@ -39,7 +39,7 @@ function LanguageBoard({ role }: LanguageBoardProps) {
         marginRight: "auto",
         paddingRight: "100px",
       }}>
-        {}
+        {currentVocabulary.englishVocabulary}
       </Typography>
     </Box>
   )

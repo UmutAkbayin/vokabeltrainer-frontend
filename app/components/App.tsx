@@ -15,17 +15,22 @@ import { setStatus } from '@/app/features/status/statusSlice';
 import { setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
 import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
 
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { setVocabulary } from '../features/vocabulary/vocabularySlice';
 
 
 function App() {
 
   const status = useAppSelector((state) => state.status.value);
   const mode = useAppSelector((state) => state.mode.value);
+  const direction = useAppSelector((state) => state.direction.value);
   const amount = useAppSelector((state) => state.amount.value);
+  const vocabularies = useAppSelector((state) => state.vocabularies.value);
+  const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
+
   const dispatch = useAppDispatch();
   
   React.useEffect(() => {
@@ -33,10 +38,10 @@ function App() {
       const getData = async () => {
         const data = await fetchVocabularies(amount);
         dispatch(setVocabularies(data));
+        handleNext(data);
       }
       getData();
     } else {
-      console.log("choose a mode please")
     }
 }, [status]);
   
@@ -48,10 +53,11 @@ function App() {
 
   }
 
-  const handleNext = () => {
-
+  const handleNext = (vocs = vocabularies) => {
+    const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
+    const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
+    dispatch(setVocabulary(unfinishedVocabularies[random]));
   }
-
 
   return (
     <main className={styles.main}>
@@ -88,22 +94,22 @@ function App() {
           gap: "0.5rem",
           fontSize: "1.3rem",
   }}>
-    { status === "off" && null}
+    {status === "off" && null}
     {/* Correct Answer<CheckCircleIcon
     fontSize="large"
     color="success"
     /> */}
         </Box>
-        <Button
-          variant="contained"
-          size="large"
-          startIcon={<SendIcon />}
-          sx={{ 
-            backgroundColor: "var(--secondary-light)",
-          }}
-          onClick={handleFetch}
-        >
-          {status === "off" ? "Start" : "Submit"}
+          <Button
+            variant="contained"
+            size="large"
+            startIcon={<SendIcon />}
+            sx={{ 
+              backgroundColor: "var(--secondary-light)",
+            }}
+            onClick={handleFetch}
+          >
+            {status === "off" ? "Start" : "Submit"}
         </Button>
         </Box>
     </main>

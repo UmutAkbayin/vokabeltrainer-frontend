@@ -21,13 +21,7 @@ export const vocabulariesSlice = createSlice({
   initialState,
   reducers: {
     setVocabularies: (state, action: PayloadAction<Vocabulary[]>) => {
-      state.value = action.payload?.map((voc) => {
-        const newVoc = {
-          ...voc,
-          step: 0,
-        };
-        return newVoc;
-      });
+      state.value = [...action.payload];
     },
     incrementVocabulary: (state, action: PayloadAction<string>) => {
       state.value = state.value.map((vocabulary) => {
@@ -44,7 +38,7 @@ export const vocabulariesSlice = createSlice({
         }
         return vocabulary;
       });
-    }, 
+    },
   }
 });
 

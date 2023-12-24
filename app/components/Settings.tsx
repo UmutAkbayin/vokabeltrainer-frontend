@@ -3,7 +3,8 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '@/app/hooks/reduxHooks';
 import { setAmount } from '@/app/features/amount/amountSlice';
-import { setMode } from '@/app/features/mode/modeSlice';
+import { setDirection } from '@/app/features/direction/directionSlice';
+import type { Direction } from '@/app/features/direction/directionSlice';
 
 import {
   FormControl,
@@ -16,7 +17,7 @@ import {
 
 export default function Settings() {
   const amount = useAppSelector((state) => state.amount.value);
-  const mode = useAppSelector((state) => state.mode.value);
+  const direction = useAppSelector((state) => state.direction.value);
   const dispatch = useAppDispatch();
 
   return (
@@ -27,13 +28,13 @@ export default function Settings() {
       gap: "1.5rem",
     }}>
       <FormControl>
-        <InputLabel size="small" id="mode-select-label">Mode</InputLabel>
+        <InputLabel size="small" id="direction-select-label">Direction</InputLabel>
         <Select
-          labelId="mode-select-label"
-          id="mode-select"
-          value={mode}
-          onChange={(e) => dispatch(setMode(e.target.value))}
-          label="Mode"
+          labelId="direction-select-label"
+          id="direction-select"
+          value={direction}
+          onChange={(e) => dispatch(setDirection(e.target.value as Direction))}
+          label="Direction"
           sx={{ width: "295px", }}
           size="small"
         >

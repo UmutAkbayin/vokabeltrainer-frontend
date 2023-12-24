@@ -2,14 +2,18 @@ import { configureStore } from '@reduxjs/toolkit';
 import amountReducer from '@/app/features/amount/amountSlice';
 import modeReducer from '@/app/features/mode/modeSlice';
 import statusReducer from '@/app/features/status/statusSlice';
-import vocabularyReducer from '@/app/features/vocabularies/vocabulariesSlice';
+import vocabulariesReducer from '@/app/features/vocabularies/vocabulariesSlice';
+import vocabularyReducer from '@/app/features/vocabulary/vocabularySlice';
+import directionReducer from '@/app/features/direction/directionSlice';
 
 export const store = configureStore({
   reducer: {
     amount: amountReducer,
     mode: modeReducer,
     status: statusReducer,
-    vocabularies: vocabularyReducer,
+    vocabularies: vocabulariesReducer,
+    vocabulary: vocabularyReducer,
+    direction: directionReducer,
   }
 });
 

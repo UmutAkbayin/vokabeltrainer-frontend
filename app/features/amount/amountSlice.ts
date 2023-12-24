@@ -24,5 +24,5 @@ export const amountSlice = createSlice({
 
 export const { setAmount } = amountSlice.actions;
 // Other code such as selectors can use the imported `RootState` type
-export const selectAmount = (state: RootState) => state.amount.value
+export const selectAmount = (state: RootState) => state.amount.value;
 export default amountSlice.reducer;

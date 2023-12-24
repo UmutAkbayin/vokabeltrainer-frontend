@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app/store';
 
+export type Mode = 'question' | 'solution' | '';
+
 // Define a type for the slice state
 export interface ModeState {
-  value: string;
+  value: Mode;
 }
 
 // Define the initial state using that type
@@ -16,7 +18,7 @@ export const modeSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    setMode: (state, action: PayloadAction<string>) => {
+    setMode: (state, action: PayloadAction<Mode>) => {
       state.value = action.payload;
     }
   }
