@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks";
 import { fetchVocabularies } from '@/app/services/fetchVocabularies';
 import { setStatus } from '@/app/features/status/statusSlice';
 import { setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
+import { setMode } from '@/app/features/mode/modeSlice';
 import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
 
 import { Box, Button, Typography } from '@mui/material';
@@ -30,6 +31,8 @@ function App() {
   const amount = useAppSelector((state) => state.amount.value);
   const vocabularies = useAppSelector((state) => state.vocabularies.value);
   const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
+  const answer = useAppSelector((state) => state.answer.value);
+
 
   const dispatch = useAppDispatch();
   
@@ -50,13 +53,15 @@ function App() {
   }
 
   const handleAssertion = () => {
-
+    
+    dispatch(setMode('solution'));
   }
 
   const handleNext = (vocs = vocabularies) => {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
     const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
     dispatch(setVocabulary(unfinishedVocabularies[random]));
+    dispatch(setMode('question'));
   }
 
   return (
@@ -107,7 +112,10 @@ function App() {
             sx={{ 
               backgroundColor: "var(--secondary-light)",
             }}
-            onClick={handleFetch}
+          onClick={() => {
+            status === 'off' ? handleFetch() : mode === 'solution' ?
+              handleNext() : handleAssertion();
+            }}
           >
             {status === "off" ? "Start" : "Submit"}
         </Button>

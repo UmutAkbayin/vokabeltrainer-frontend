@@ -13,6 +13,7 @@ interface LanguageBoardProps {
 
 function LanguageBoard({ role }: LanguageBoardProps) {
   const direction = useAppSelector((state) => state.direction.value);
+  const mode = useAppSelector((state) => state.mode.value);
   const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
 
   const isUSA = role === "input" && direction === "englishToGerman";
@@ -39,7 +40,9 @@ function LanguageBoard({ role }: LanguageBoardProps) {
         marginRight: "auto",
         paddingRight: "100px",
       }}>
-        {currentVocabulary.englishVocabulary}
+        {role === 'input' && currentVocabulary.englishVocabulary}
+        {role === 'output' && mode === 'solution'
+          && currentVocabulary.germanVocabularies.join(', ')}
       </Typography>
     </Box>
   )
