@@ -25,7 +25,7 @@ export const vocabulariesSlice = createSlice({
     },
     incrementVocabulary: (state, action: PayloadAction<string>) => {
       state.value = state.value.map((vocabulary) => {
-        if (vocabulary.id === action.payload) {
+        if (vocabulary.id === action.payload && vocabulary.step < 3) {
           vocabulary.step += 1;
         }
         return vocabulary;

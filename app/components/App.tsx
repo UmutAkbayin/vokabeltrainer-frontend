@@ -12,7 +12,7 @@ import AnswerInput from './AnswerInput';
 import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
 import { fetchVocabularies } from '@/app/services/fetchVocabularies';
 import { setStatus } from '@/app/features/status/statusSlice';
-import { setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
+import { incrementVocabulary, resetVocabulary, setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
 import { setMode } from '@/app/features/mode/modeSlice';
 import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
 
@@ -53,8 +53,17 @@ function App() {
   }
 
   const handleAssertion = () => {
-    
-    dispatch(setMode('solution'));
+    if (currentVocabulary.germanVocabularies.includes(answer)) {
+      dispatch(incrementVocabulary(currentVocabulary.id));
+    } else {
+      dispatch(resetVocabulary(currentVocabulary.id));
+    }
+
+    if (vocabularies.filter((voc) => voc.step < 3).length > 0) {
+      dispatch(setMode('solution'));
+    } else {
+      console.log("finished");
+    }
   }
 
   const handleNext = (vocs = vocabularies) => {
