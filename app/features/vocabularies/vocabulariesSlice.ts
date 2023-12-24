@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app/store';
 
-type Vocabulary = {
+export type Vocabulary = {
     id: string;
     englishVocabulary: string;
     germanVocabularies: string[];

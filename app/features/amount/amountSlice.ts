@@ -8,7 +8,7 @@ export interface AmountState {
 
 // Define the initial state using that type
 const initialState: AmountState = {
-  value: 0
+  value: 1,
 };
 
 export const amountSlice = createSlice({

@@ -9,11 +9,11 @@ import Settings from '@/app/components/Settings';
 import ScoreBoard from './ScoreBoard';
 import LanguageBoard from './LanguageBoard';
 import AnswerInput from './AnswerInput';
-import { useQuery } from '@tanstack/react-query';
 import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
 import { fetchVocabularies } from '@/app/services/fetchVocabularies';
 import { setStatus } from '@/app/features/status/statusSlice';
 import { setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
+import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
 
 import { Box, Button } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -27,25 +27,21 @@ function App() {
   const mode = useAppSelector((state) => state.mode.value);
   const amount = useAppSelector((state) => state.amount.value);
   const dispatch = useAppDispatch();
-
-  const query =
-    useQuery({
-      queryKey: ['vocabularies'],
-      queryFn: () => fetchVocabularies(amount),
-      enabled: false,
-    });
   
   React.useEffect(() => {
-  if (mode !== "") {
-      dispatch(setStatus("on"));
-      dispatch(setVocabularies(query.data));
-  } else {
-    console.log("choose a mode please")
-  }
-}, [query.data]);
+    if (status === "on") {
+      const getData = async () => {
+        const data = await fetchVocabularies(amount);
+        dispatch(setVocabularies(data));
+      }
+      getData();
+    } else {
+      console.log("choose a mode please")
+    }
+}, [status]);
   
   const handleFetch = () => {
-    query.refetch();
+    dispatch(setStatus("on"));
   }
 
   const handleAssertion = () => {
