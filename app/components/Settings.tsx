@@ -47,7 +47,7 @@ export default function Settings() {
         variant="outlined"
         size="small"
         value={amount}
-        onChange={(e) => dispatch(setAmount(parseInt(e.target.value)))}
+        onChange={(e) => dispatch(setAmount(e.target.value))}
         sx={{ width: "120px" }}
       />
     </Box>

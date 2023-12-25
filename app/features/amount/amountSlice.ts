@@ -3,12 +3,12 @@ import type { RootState } from '@/app/store';
 
 // Define a type for the slice state
 export interface AmountState {
-  value: number;
+  value: string;
 }
 
 // Define the initial state using that type
 const initialState: AmountState = {
-  value: 1,
+  value: "1",
 };
 
 export const amountSlice = createSlice({
@@ -16,7 +16,7 @@ export const amountSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    setAmount: (state, action: PayloadAction<number>) => {
+    setAmount: (state, action: PayloadAction<string>) => {
       state.value = action.payload;
     }
   }
