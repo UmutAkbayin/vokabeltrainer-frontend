@@ -12,15 +12,17 @@ import AnswerInput from './AnswerInput';
 import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
 import { fetchVocabularies } from '@/app/services/fetchVocabularies';
 import { setStatus } from '@/app/features/status/statusSlice';
-import { incrementVocabulary, resetVocabulary, setVocabularies } from '@/app/features/vocabularies/vocabulariesSlice';
+import { setAmount } from '@/app/features/amount/amountSlice';
 import { setMode } from '@/app/features/mode/modeSlice';
+import { incrementVocabulary, resetVocabulary, setVocabularies }
+  from '@/app/features/vocabularies/vocabulariesSlice';
 import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
-
 import { Box, Button, Typography } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { setVocabulary } from '../features/vocabulary/vocabularySlice';
+import { setDirection } from '../features/direction/directionSlice';
 
 
 function App() {
@@ -37,7 +39,7 @@ function App() {
   const dispatch = useAppDispatch();
   
   React.useEffect(() => {
-    if (status === "on") {
+    if (status === 'on') {
       const getData = async () => {
         const data = await fetchVocabularies(amount);
         dispatch(setVocabularies(data));
@@ -73,6 +75,20 @@ function App() {
     dispatch(setMode('question'));
   }
 
+  const handleReset = () => {
+    dispatch(setStatus('off'));
+    dispatch(setMode(''));
+    dispatch(setDirection(''));
+    dispatch(setAmount("1"));
+    dispatch(setVocabularies([]));
+    dispatch(setVocabulary({
+    id: '',
+    englishVocabulary: '',
+    germanVocabularies: [],
+    step: 0,
+  },));
+  }
+
   return (
     <main className={styles.main}>
       <h1>Vocabulary Trainer</h1>
@@ -99,6 +115,7 @@ function App() {
               color: "white",
             }
           }}
+          onClick={handleReset}
         >
           Reset
         </Button>
@@ -108,7 +125,7 @@ function App() {
           gap: "0.5rem",
           fontSize: "1.3rem",
   }}>
-    {status === "off" && null}
+    {status === 'off' && null}
     {/* Correct Answer<CheckCircleIcon
     fontSize="large"
     color="success"
@@ -126,7 +143,7 @@ function App() {
               handleNext() : handleAssertion();
             }}
           >
-            {status === "off" ? "Start" : "Submit"}
+            {status === 'off' ? 'Start' : 'Submit'}
         </Button>
         </Box>
     </main>
