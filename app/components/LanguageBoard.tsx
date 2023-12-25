@@ -40,7 +40,7 @@ function LanguageBoard({ role }: LanguageBoardProps) {
         marginRight: "auto",
         paddingRight: "100px",
       }}>
-        {role === 'input' && currentVocabulary.englishVocabulary}
+        {role === 'input' && currentVocabulary?.englishVocabulary}
         {role === 'output' && mode === 'solution'
           && currentVocabulary.germanVocabularies.join(', ')}
       </Typography>

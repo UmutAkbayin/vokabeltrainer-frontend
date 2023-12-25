@@ -1,26 +1,27 @@
-"use client";
+'use client';
 
 import React from 'react';
-
 
 import styles from '@/app/styles/App.module.css';
 
 import Settings from '@/app/components/Settings';
 import ScoreBoard from './ScoreBoard';
 import LanguageBoard from './LanguageBoard';
-import AnswerInput from './AnswerInput';
 import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
 import { fetchVocabularies } from '@/app/services/fetchVocabularies';
 import { setStatus } from '@/app/features/status/statusSlice';
 import { setAmount } from '@/app/features/amount/amountSlice';
 import { setMode } from '@/app/features/mode/modeSlice';
+import { setAnswer } from '@/app/features/answer/answerSlice';
 import { incrementVocabulary, resetVocabulary, setVocabularies }
   from '@/app/features/vocabularies/vocabulariesSlice';
 import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
 import { Box, Button, Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { setVocabulary } from '../features/vocabulary/vocabularySlice';
 import { setDirection } from '../features/direction/directionSlice';
 
@@ -51,27 +52,30 @@ function App() {
 }, [status]);
   
   const handleFetch = () => {
-    dispatch(setStatus("on"));
+    dispatch(setStatus('on'));
   }
 
-  const handleAssertion = () => {
-    if (currentVocabulary.germanVocabularies.includes(answer)) {
-      dispatch(incrementVocabulary(currentVocabulary.id));
-    } else {
-      dispatch(resetVocabulary(currentVocabulary.id));
-    }
+  const assert = () => currentVocabulary?.germanVocabularies.includes(answer) ?
+    true : false;
 
-    if (vocabularies.filter((voc) => voc.step < 3).length > 0) {
-      dispatch(setMode('solution'));
+  const handleAssertion = () => {
+    if (assert()) {
+      dispatch(incrementVocabulary(currentVocabulary?.id));
     } else {
-      console.log("finished");
+      dispatch(resetVocabulary(currentVocabulary?.id));
     }
+      dispatch(setMode('solution'));
   }
 
   const handleNext = (vocs = vocabularies) => {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
+    if (unfinishedVocabularies.length === 0) {
+      handleReset();
+      return;
+    } 
     const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
     dispatch(setVocabulary(unfinishedVocabularies[random]));
+    dispatch(setAnswer(''));
     dispatch(setMode('question'));
   }
 
@@ -79,7 +83,8 @@ function App() {
     dispatch(setStatus('off'));
     dispatch(setMode(''));
     dispatch(setDirection(''));
-    dispatch(setAmount("1"));
+    dispatch(setAmount('1'));
+    dispatch(setAnswer(''));
     dispatch(setVocabularies([]));
     dispatch(setVocabulary({
     id: '',
@@ -94,9 +99,20 @@ function App() {
       <h1>Vocabulary Trainer</h1>
       <Settings />
       <ScoreBoard />
-      <LanguageBoard role="input" />
-      <LanguageBoard role="output" />
-      <AnswerInput />
+      <LanguageBoard role='input' />
+      <LanguageBoard role='output' />
+      <TextField
+        fullWidth
+        placeholder='Your Answer'
+        value={answer}
+        onChange={(e) => dispatch(setAnswer(e.target.value))}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            mode === 'solution' ? handleNext() : handleAssertion();
+          }
+        }}
+        disabled={status === 'off'}
+      />
       <Box sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -105,8 +121,8 @@ function App() {
       }}>
         <Button
           className='btn-secondary'
-          variant="contained"
-          size="large"
+          variant='contained'
+          size='large'
           startIcon={<RestartAltIcon />}
           sx={{
             backgroundColor: "var(--light-gray)",
@@ -125,15 +141,25 @@ function App() {
           gap: "0.5rem",
           fontSize: "1.3rem",
   }}>
-    {status === 'off' && null}
-    {/* Correct Answer<CheckCircleIcon
-    fontSize="large"
-    color="success"
-    /> */}
+      {status === 'off' || mode === 'question' && null}
+          {mode === 'solution' && assert() &&
+            <>
+              <CheckCircleIcon
+                fontSize="large"
+                color="success"
+              />Correct Answer
+            </>
+          }
+          {mode === 'solution' && !assert() && 
+            <>
+              <CancelIcon fontSize='large' color='error' />Wrong Answer
+            </>
+      }
+          
         </Box>
           <Button
-            variant="contained"
-            size="large"
+            variant='contained'
+            size='large'
             startIcon={<SendIcon />}
             sx={{ 
               backgroundColor: "var(--secondary-light)",
