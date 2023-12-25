@@ -18,6 +18,7 @@ import {
 export default function Settings() {
   const amount = useAppSelector((state) => state.amount.value);
   const direction = useAppSelector((state) => state.direction.value);
+  const status = useAppSelector((state) => state.status.value);
   const dispatch = useAppDispatch();
 
   return (
@@ -37,6 +38,7 @@ export default function Settings() {
           label="Direction"
           sx={{ width: "295px", }}
           size="small"
+          disabled={status === 'on'}
         >
           <MenuItem value="englishToGerman">English To German</MenuItem>
         </Select>
@@ -49,6 +51,7 @@ export default function Settings() {
         value={amount}
         onChange={(e) => dispatch(setAmount(e.target.value))}
         sx={{ width: "120px" }}
+        disabled={status === 'on'}
       />
     </Box>
   );
