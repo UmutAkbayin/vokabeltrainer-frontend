@@ -10,7 +10,7 @@ import App from '@/components/App';
 function StateProvider() {
   return (
     <Provider store={store}>
-        <App />
+      <App />
     </Provider>
   )
 }

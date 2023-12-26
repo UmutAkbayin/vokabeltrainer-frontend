@@ -6,6 +6,7 @@ import vocabulariesReducer from '@/features/vocabularies/vocabulariesSlice';
 import vocabularyReducer from '@/features/vocabulary/vocabularySlice';
 import directionReducer from '@/features/direction/directionSlice';
 import answerReducer from '@/features/answer/answerSlice';
+import countReducer from '@/features/count/countSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     vocabulary: vocabularyReducer,
     direction: directionReducer,
     answer: answerReducer,
+    count: countReducer,
   }
 });
 

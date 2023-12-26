@@ -13,29 +13,32 @@ import { setStatus } from '@/features/status/statusSlice';
 import { setAmount } from '@/features/amount/amountSlice';
 import { setMode } from '@/features/mode/modeSlice';
 import { setAnswer } from '@/features/answer/answerSlice';
+import { incrementCount, resetCount } from '@/features/count/countSlice';
 import { incrementVocabulary, resetVocabulary, setVocabularies }
   from '@/features/vocabularies/vocabulariesSlice';
-import type { Vocabulary } from '@/features/vocabularies/vocabulariesSlice';
+import { setVocabulary } from '@/features/vocabulary/vocabularySlice';
+import { setDirection } from '@/features/direction/directionSlice';
 import { Box, Button, Typography } from '@mui/material';
 import { TextField } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { setVocabulary } from '@/features/vocabulary/vocabularySlice';
-import { setDirection } from '@/features/direction/directionSlice';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 function App() {
 
   const status = useAppSelector((state) => state.status.value);
   const mode = useAppSelector((state) => state.mode.value);
-  const direction = useAppSelector((state) => state.direction.value);
+  const count = useAppSelector((state) => state.count.value);
   const amount = useAppSelector((state) => state.amount.value);
   const vocabularies = useAppSelector((state) => state.vocabularies.value);
   const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
   const answer = useAppSelector((state) => state.answer.value);
 
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
   
@@ -64,13 +67,15 @@ function App() {
     } else {
       dispatch(resetVocabulary(currentVocabulary?.id));
     }
-      dispatch(setMode('solution'));
+    dispatch(setMode('solution'));
+    dispatch(incrementCount());
   }
 
   const handleNext = (vocs = vocabularies) => {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
     if (unfinishedVocabularies.length === 0) {
       handleReset();
+      router.push(`/statistics/?amount=${amount}&count=${count}`);
       return;
     } 
     const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
@@ -86,6 +91,7 @@ function App() {
     dispatch(setAmount('1'));
     dispatch(setAnswer(''));
     dispatch(setVocabularies([]));
+    dispatch(resetCount());
     dispatch(setVocabulary({
     id: '',
     englishVocabulary: '',
@@ -93,7 +99,6 @@ function App() {
     step: 0,
   },));
   }
-
   return (
     <main className={styles.main}>
       <h1>Vocabulary Trainer</h1>
@@ -171,7 +176,7 @@ function App() {
           >
             {status === 'off' ? 'Start' : 'Submit'}
         </Button>
-        </Box>
+      </Box>
     </main>
   )
 }
