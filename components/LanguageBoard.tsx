@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
-import { useAppSelector } from "@/app/hooks/reduxHooks"; 
+import { useAppSelector } from "@/hooks/reduxHooks"; 
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import germanyFlag from '../../public/germany.png';
-import usFlag from '../../public/united-states.png';
+import germanyFlag from '@/public/germany.png';
+import usFlag from '@/public/united-states.png';
 
 interface LanguageBoardProps {
   role: string;

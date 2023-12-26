@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import amountReducer from '@/app/features/amount/amountSlice';
-import modeReducer from '@/app/features/mode/modeSlice';
-import statusReducer from '@/app/features/status/statusSlice';
-import vocabulariesReducer from '@/app/features/vocabularies/vocabulariesSlice';
-import vocabularyReducer from '@/app/features/vocabulary/vocabularySlice';
-import directionReducer from '@/app/features/direction/directionSlice';
-import answerReducer from '@/app/features/answer/answerSlice';
+import amountReducer from '@/features/amount/amountSlice';
+import modeReducer from '@/features/mode/modeSlice';
+import statusReducer from '@/features/status/statusSlice';
+import vocabulariesReducer from '@/features/vocabularies/vocabulariesSlice';
+import vocabularyReducer from '@/features/vocabulary/vocabularySlice';
+import directionReducer from '@/features/direction/directionSlice';
+import answerReducer from '@/features/answer/answerSlice';
 
 export const store = configureStore({
   reducer: {

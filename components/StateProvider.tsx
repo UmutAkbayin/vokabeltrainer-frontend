@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import {store} from '@/app/store';
+import {store} from '@/store';
 import { Provider } from 'react-redux';
 
-import App from '@/app/components/App';
+import App from '@/components/App';
 
 function StateProvider() {
   return (

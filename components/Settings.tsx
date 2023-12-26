@@ -1,10 +1,10 @@
 "use client";
 
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '@/app/hooks/reduxHooks';
-import { setAmount } from '@/app/features/amount/amountSlice';
-import { setDirection } from '@/app/features/direction/directionSlice';
-import type { Direction } from '@/app/features/direction/directionSlice';
+import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
+import { setAmount } from '@/features/amount/amountSlice';
+import { setDirection } from '@/features/direction/directionSlice';
+import type { Direction } from '@/features/direction/directionSlice';
 
 import {
   FormControl,

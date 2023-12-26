@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppSelector } from "@/app/hooks/reduxHooks"; 
+import { useAppSelector } from "@/hooks/reduxHooks"; 
   
 import { Box, Typography } from "@mui/material";
 

@@ -2,28 +2,28 @@
 
 import React from 'react';
 
-import styles from '@/app/styles/App.module.css';
+import styles from '@/styles/App.module.css';
 
-import Settings from '@/app/components/Settings';
+import Settings from '@/components/Settings';
 import ScoreBoard from './ScoreBoard';
 import LanguageBoard from './LanguageBoard';
-import { useAppDispatch, useAppSelector } from "@/app/hooks/reduxHooks"; 
-import { fetchVocabularies } from '@/app/services/fetchVocabularies';
-import { setStatus } from '@/app/features/status/statusSlice';
-import { setAmount } from '@/app/features/amount/amountSlice';
-import { setMode } from '@/app/features/mode/modeSlice';
-import { setAnswer } from '@/app/features/answer/answerSlice';
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks"; 
+import { fetchVocabularies } from '@/services/fetchVocabularies';
+import { setStatus } from '@/features/status/statusSlice';
+import { setAmount } from '@/features/amount/amountSlice';
+import { setMode } from '@/features/mode/modeSlice';
+import { setAnswer } from '@/features/answer/answerSlice';
 import { incrementVocabulary, resetVocabulary, setVocabularies }
-  from '@/app/features/vocabularies/vocabulariesSlice';
-import type { Vocabulary } from '@/app/features/vocabularies/vocabulariesSlice';
+  from '@/features/vocabularies/vocabulariesSlice';
+import type { Vocabulary } from '@/features/vocabularies/vocabulariesSlice';
 import { Box, Button, Typography } from '@mui/material';
 import { TextField } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { setVocabulary } from '../features/vocabulary/vocabularySlice';
-import { setDirection } from '../features/direction/directionSlice';
+import { setVocabulary } from '@/features/vocabulary/vocabularySlice';
+import { setDirection } from '@/features/direction/directionSlice';
 
 
 function App() {
