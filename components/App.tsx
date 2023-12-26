@@ -24,7 +24,6 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 
@@ -146,7 +145,7 @@ function App() {
           gap: "0.5rem",
           fontSize: "1.3rem",
   }}>
-      {status === 'off' || mode === 'question' && null}
+      {status === 'off' && null}
           {mode === 'solution' && assert() &&
             <>
               <CheckCircleIcon

@@ -1,7 +1,6 @@
 import React from 'react';
 
-function Layout({ children, modal }: {
-  children: React.ReactNode,
+function Layout({ modal }: {
   modal: React.ReactNode,
 }) {
   return (
