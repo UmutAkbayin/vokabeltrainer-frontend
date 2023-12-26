@@ -20,7 +20,6 @@ export const countSlice = createSlice({
     },
     incrementCount: (state) => {
       state.value += 1;
-      console.log(state.value);
     }
   }
 });

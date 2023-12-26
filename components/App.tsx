@@ -75,7 +75,7 @@ function App() {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
     if (unfinishedVocabularies.length === 0) {
       handleReset();
-      router.push(`/statistics/?amount=${amount}&count=${count}`);
+      router.push(`/result/(..)statistics/?amount=${amount}&count=${count}`);
       return;
     } 
     const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
