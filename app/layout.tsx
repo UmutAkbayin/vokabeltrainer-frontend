@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from 'next';
+import './globals.css';
+import Topbar from '@/components/Topbar';
 
 export const metadata: Metadata = {
   title: 'Vocabulary Trainer',
@@ -18,6 +19,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" />
       </head>
       <body>
+        <Topbar />
         {children}
       </body>
     </html>

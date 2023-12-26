@@ -165,9 +165,6 @@ function App() {
             variant='contained'
             size='large'
             startIcon={<SendIcon />}
-            sx={{ 
-              backgroundColor: "var(--secondary-light)",
-            }}
           onClick={() => {
             status === 'off' ? handleFetch() : mode === 'solution' ?
               handleNext() : handleAssertion();
