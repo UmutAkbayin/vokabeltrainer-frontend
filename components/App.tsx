@@ -24,7 +24,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
   const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
   const answer = useAppSelector((state) => state.answer.value);
 
-  const router = useRouter();
+  //const router = useRouter();
 
   const dispatch = useAppDispatch();
   
@@ -72,11 +72,11 @@ function App() {
 
   const handleNext = (vocs = vocabularies) => {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
-    if (unfinishedVocabularies.length === 0) {
+    /* if (unfinishedVocabularies.length === 0) {
       handleReset();
       router.push(`/result/(..)statistics/?amount=${amount}&count=${count}`);
       return;
-    } 
+    }  */
     const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
     dispatch(setVocabulary(unfinishedVocabularies[random]));
     dispatch(setAnswer(''));

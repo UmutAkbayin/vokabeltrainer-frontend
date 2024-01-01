@@ -2,14 +2,14 @@
 
 import React from 'react';
 
-import { store } from '@/store';
+import { setupStore } from '@/store';
 import { Provider } from 'react-redux';
 
 import App from '@/components/App';
 
 function StateProvider() {
   return (
-    <Provider store={store}>
+    <Provider store={setupStore()}>
       <App />
     </Provider>
   )

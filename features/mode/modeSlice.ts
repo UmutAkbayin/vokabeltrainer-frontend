@@ -4,7 +4,7 @@ import type { RootState } from '@/store';
 export type Mode = 'question' | 'solution' | '';
 
 // Define a type for the slice state
-export interface ModeState {
+interface ModeState {
   value: Mode;
 }
 

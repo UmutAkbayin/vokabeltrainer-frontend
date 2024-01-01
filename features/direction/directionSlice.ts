@@ -4,7 +4,7 @@ import type { RootState } from '@/store';
 export type Direction = 'englishToGerman' | 'germanToEnglish' | 'mixed' | ''
 
 // Define a type for the slice state
-export interface DirectionState {
+interface DirectionState {
   value: Direction;
 }
 

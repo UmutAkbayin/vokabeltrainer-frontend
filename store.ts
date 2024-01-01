@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import amountReducer from '@/features/amount/amountSlice';
 import modeReducer from '@/features/mode/modeSlice';
 import statusReducer from '@/features/status/statusSlice';
@@ -8,20 +8,26 @@ import directionReducer from '@/features/direction/directionSlice';
 import answerReducer from '@/features/answer/answerSlice';
 import countReducer from '@/features/count/countSlice';
 
-export const store = configureStore({
-  reducer: {
-    amount: amountReducer,
-    mode: modeReducer,
-    status: statusReducer,
-    vocabularies: vocabulariesReducer,
-    vocabulary: vocabularyReducer,
-    direction: directionReducer,
-    answer: answerReducer,
-    count: countReducer,
-  }
-});
+// Create the root reducer independently to obtain the RootState type
+const rootReducer = combineReducers({
+  amount: amountReducer,
+  mode: modeReducer,
+  status: statusReducer,
+  vocabularies: vocabulariesReducer,
+  vocabulary: vocabularyReducer,
+  direction: directionReducer,
+  answer: answerReducer,
+  count: countReducer,
+})
+
+export function setupStore(preloadedState?: Partial<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+}
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
