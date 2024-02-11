@@ -32,6 +32,7 @@ function App() {
   const status = useAppSelector((state) => state.status.value);
   const mode = useAppSelector((state) => state.mode.value);
   const count = useAppSelector((state) => state.count.value);
+  const direction = useAppSelector((state) => state.direction.value);
   const amount = useAppSelector((state) => state.amount.value);
   const vocabularies = useAppSelector((state) => state.vocabularies.value);
   const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
