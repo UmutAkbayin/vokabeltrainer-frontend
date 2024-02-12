@@ -1,10 +1,9 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
+import user from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import App from '@/components/App';
 import { renderWithProviders } from '@/utils/test-utils';
-import {MockStore, mockStore} from 'redux-mock-store' //ES6 modules
 import { setDirection } from '@/features/direction/directionSlice';
-
 
 describe("default settings", () => {
   test("loads and displays initially", async () => {
@@ -17,13 +16,33 @@ describe("default settings", () => {
     // ASSERT
     expect(zeroes).toHaveLength(4);
   });
+});
 
-  test("does not load the vocabularies without direction", async () => {
+describe("start game", () => { 
+  test("start game after chosing direction", async () => {
+    // ARRANGE
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () =>
+        Promise.resolve([
+          {
+            id: "452518bf-dc8a-4563-9d0a-932495c930cc",
+            englishVocabulary: "to perceive",
+            germanVocabularies: ["wahrnehmen", "bemerken", "erkennen"],
+            step: 0,
+          },
+        ]),
+    });
     const { store } = renderWithProviders(<App />);
+    const button = await screen.findByRole("button", {
+      name: /start/i,
+    });
+    const base = screen.getByText(/base/i).nextSibling;
+
+    // ACT
     act(() => store.dispatch(setDirection("englishToGerman")));
-    
-    const state = store.getState();
-    screen.debug();
+    await user.click(button);
+    // ASSERT
+    expect(base.textContent).toEqual("1");
   });
 });
 

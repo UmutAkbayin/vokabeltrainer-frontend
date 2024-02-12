@@ -166,7 +166,7 @@ function App() {
             variant='contained'
             size='large'
             startIcon={<SendIcon />}
-          onClick={() => {
+            onClick={() => {
             status === 'off' ? handleFetch() : mode === 'solution' ?
               handleNext() : handleAssertion();
             }}
