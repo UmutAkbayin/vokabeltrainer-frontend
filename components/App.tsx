@@ -55,7 +55,9 @@ function App() {
 }, [status]);
   
   const handleFetch = () => {
-    dispatch(setStatus('on'));
+    if (direction !== '') { 
+      dispatch(setStatus('on'));
+    }
   }
 
   const assert = () => currentVocabulary?.germanVocabularies.includes(answer) ?
