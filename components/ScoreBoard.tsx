@@ -28,64 +28,80 @@ export default function ScoreBoard() {
       alignItems: "center",
     }}>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography sx={{
+        <Typography
+          component="h2"
+          sx={{
           color: "var(--secondary-color)",
-          fontSize: "1.25rem",
+          fontSize: "1rem",
           textTransform: "uppercase",
         }}>
           Base
         </Typography>
-        <Typography sx={{
+        <Typography
+          component="h3"
+          sx={{
           color: "var(--primary-color)",
-          fontSize: "2.5rem",
+          fontSize: "1.5rem",
           textAlign: "center",
         }}>
           {baseValue}
         </Typography>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography sx={{
+        <Typography
+          component="h2"
+          sx={{
           color: "var(--secondary-color)",
-          fontSize: "1.25rem",
+          fontSize: "1rem",
           textTransform: "uppercase",
         }}>
           Step 1
         </Typography>
-        <Typography sx={{
+        <Typography
+          component="h3"
+          sx={{
           color: "var(--primary-color)",
-          fontSize: "2.5rem",
+          fontSize: "1.5rem",
           textAlign: "center",
         }}>
           {step1Value}
         </Typography>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography sx={{
+        <Typography
+          component="h2"
+          sx={{
           color: "var(--secondary-color)",
-          fontSize: "1.25rem",
+          fontSize: "1rem",
           textTransform: "uppercase",
         }}>
           Step 2
         </Typography>
-        <Typography sx={{
+        <Typography
+          component="h3"
+          sx={{
           color: "var(--primary-color)",
-          fontSize: "2.5rem",
+          fontSize: "1.5rem",
           textAlign: "center",
         }}>
           {step2Value}
         </Typography>
       </Box>
 <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography sx={{
+        <Typography
+          component="h2"
+          sx={{
           color: "var(--secondary-color)",
-          fontSize: "1.25rem",
+          fontSize: "1rem",
           textTransform: "uppercase",
         }}>
           Done
         </Typography>
-        <Typography sx={{
+        <Typography
+          component="h3"
+          sx={{
           color: "var(--primary-color)",
-          fontSize: "2.5rem",
+          fontSize: "1.5rem",
           textAlign: "center",
         }}>
           {doneValue}

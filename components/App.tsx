@@ -103,14 +103,19 @@ function App() {
   }
   return (
     <main className={styles.main}>
-      <h1>Vocabulary Trainer</h1>
+      <Typography
+        component="h1"
+        sx={{ fontSize: "3rem", fontWeight: 600, fontFamily: "Times New Roman"}}
+      >Vocabulary Trainer
+      </Typography>
       <Settings />
       <ScoreBoard />
       <LanguageBoard role='input' />
       <LanguageBoard role='output' />
       <TextField
         fullWidth
-        placeholder='Your Answer'
+        id='answer-input'
+        label='Your Answer'
         value={answer}
         onChange={(e) => dispatch(setAnswer(e.target.value))}
         onKeyDown={(e) => {
@@ -164,7 +169,7 @@ function App() {
       }
           
         </Box>
-          <Button
+        <Button
             variant='contained'
             size='large'
             startIcon={<SendIcon />}

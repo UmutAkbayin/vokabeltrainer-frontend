@@ -29,10 +29,16 @@ export default function Settings() {
       gap: "1.5rem",
     }}>
       <FormControl>
-        <InputLabel size="small" id="direction-select-label">Direction</InputLabel>
+        <InputLabel
+          size="small"
+          id={"direction-select-label"}
+          htmlFor={"direction-select"}
+        >
+          Direction
+        </InputLabel>
         <Select
           labelId="direction-select-label"
-          id="direction-select"
+          inputProps={{ "id": "direction-select"}}
           value={direction}
           onChange={(e) => dispatch(setDirection(e.target.value as Direction))}
           label="Direction"
@@ -44,6 +50,7 @@ export default function Settings() {
         </Select>
       </FormControl>
       <TextField
+        id="amount-input"
         label="Amount"
         type="number"
         variant="outlined"
