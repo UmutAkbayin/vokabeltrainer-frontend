@@ -10,7 +10,7 @@ interface DirectionState {
 
 // Define the initial state using that type
 const initialState: DirectionState = {
-  value: '',
+  value: 'englishToGerman',
 };
 
 export const directionSlice = createSlice({
