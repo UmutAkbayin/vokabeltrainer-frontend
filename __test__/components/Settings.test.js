@@ -1,4 +1,4 @@
-import {screen, waitFor, act} from "@testing-library/react";
+import {screen} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import {renderWithProviders} from "@/utils/test-utils";
@@ -16,10 +16,13 @@ test("renders initially with English To German Direction", async () => {
   renderWithProviders(<Settings />);
 
   const select = screen.getByRole("combobox", {
-    name: "Direction",
+    name: /direction/i
   });
 
-  screen.debug();
+  const selectedOption = await screen.getByText(/english to german/i)
+
+  expect(select).toBeInTheDocument();
+  expect(selectedOption).toBeInTheDocument();
 });
 
 test("can change amount", async () => {
