@@ -42,7 +42,7 @@ function LanguageBoard({ role }: LanguageBoardProps) {
       }}>
         {role === 'input' && currentVocabulary?.englishVocabulary}
         {role === 'output' && mode === 'solution'
-          && currentVocabulary.germanVocabularies.join(', ')}
+          && currentVocabulary?.germanVocabularies.join(', ')}
       </Typography>
     </Box>
   )

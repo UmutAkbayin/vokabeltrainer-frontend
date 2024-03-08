@@ -42,7 +42,7 @@ function App() {
 
   const dispatch = useAppDispatch();
   
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     if (status === 'on') {
       const getData = async () => {
         const data = await fetchVocabularies(amount);
@@ -53,10 +53,17 @@ function App() {
     } else {
     }
 }, [status]);
-  
-  const handleFetch = () => {
-    if (direction !== '') { 
-      dispatch(setStatus('on'));
+   */
+  const handleFetch = async () => {
+    try {
+      const data = await fetchVocabularies(amount);
+      if (data) {
+        dispatch(setStatus('on'));
+        dispatch(setVocabularies(data));
+        handleNext(data);
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -80,7 +87,7 @@ function App() {
       router.push(`/result/(..)statistics/?amount=${amount}&count=${count}`);
       return;
     }  */
-    const random = Math.trunc(Math.random() * unfinishedVocabularies.length);
+    const random = Math.trunc(Math.random() * unfinishedVocabularies?.length);
     dispatch(setVocabulary(unfinishedVocabularies[random]));
     dispatch(setAnswer(''));
     dispatch(setMode('question'));

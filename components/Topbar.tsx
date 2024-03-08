@@ -3,7 +3,9 @@ import React from 'react';
 
 function Topbar() {
   return (
-    <Box sx={{
+    <Box
+      component={"nav"}
+      sx={{
       marginTop: '1rem',
       display: 'flex',
       gap: '1rem',
