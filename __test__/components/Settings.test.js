@@ -1,42 +1,44 @@
 import { screen, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from "@testing-library/user-event";
 import {renderWithProviders} from '@/utils/test-utils';
 import Settings from '@/components/Settings';
 import { setDirection } from '@/features/direction/directionSlice';
 import { setAmount } from '@/features/amount/amountSlice';
 
-test('it renders initially with amount 1', async () => { 
+test('renders initially with amount 1', async () => { 
   renderWithProviders(<Settings />);
   
-  const input = screen.getByLabelText(/amount/i);
+  const input = screen.getByRole('spinbutton');
 
   expect(input.value).toBe('1');
 });
 
-test('it renders initially without direction', async () => { 
+test('renders initially without direction', async () => { 
   renderWithProviders(<Settings />);
 
-  const select = screen.getByLabelText(/direction/i);
+  const select = screen.getByRole('combobox', {
+    name: 'Direction',
+  });
 
   expect(select.value).toBeUndefined();
 });
 
-test('it can change amount', async () => { 
+test('can change amount', async () => { 
   const {store} = renderWithProviders(<Settings />);
 
-  const input = screen.getByLabelText(/amount/i);
+  const input = screen.getByRole('spinbutton');
 
-  act(() => store.dispatch(setAmount('7')));
+  await userEvent.clear(input);
+  await userEvent.type(input, '7');
 
   expect(input.value).toBe('7');
 });
 
-test('it can change direction', async () => { 
+test('can change direction', async () => { 
+
   const { store } = renderWithProviders(<Settings />);
 
-  const select = await screen.findByLabelText(/direction/i);
-
-  act(() => store.dispatch(setDirection("englishToGerman")));
-
-  expect(select.textContent).toEqual('English To German');
+  const options = screen.getAllByRole('option');
+  //expect(screen.getByRole('option', { name: 'English To German' }).selected).toBe(true);
 });

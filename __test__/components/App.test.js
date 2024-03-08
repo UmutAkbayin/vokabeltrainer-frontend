@@ -1,5 +1,5 @@
 import { act, screen, waitFor } from '@testing-library/react';
-import user from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import App from '@/components/App';
 import { renderWithProviders } from '@/utils/test-utils';
@@ -26,7 +26,7 @@ describe('start game', () => {
       name: /start/i,
     });
     
-    await user.click(button);
+    await userEvent.click(button);
 
     expect(getData).toHaveBeenCalledTimes(0);
     await waitFor(async () => {
@@ -69,7 +69,7 @@ describe('start game', () => {
 
     // ACT
     act(() => store.dispatch(setDirection('englishToGerman')));
-    await user.click(button);
+    await userEvent.click(button);
     // ASSERT
     await waitFor(async () => {
       expect(base.textContent).toEqual('1');
