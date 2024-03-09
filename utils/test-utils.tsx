@@ -3,6 +3,12 @@ import { render } from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { AppStore, RootState, setupStore } from '@/store';
+import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useRouter } from "next/navigation";
+import 'next-router-mock';
+
+jest.mock('next/navigation', () => jest.requireActual('next-router-mock'))
+
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -21,10 +27,13 @@ export function renderWithProviders(
     }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
+    const router = useRouter();
     return (
-      <Provider store={store}>
-        {children}
-      </Provider>
+      <AppRouterContext.Provider value={router}>
+        <Provider store={store}>
+          {children}
+        </Provider>
+      </AppRouterContext.Provider>
     )
   }
 
