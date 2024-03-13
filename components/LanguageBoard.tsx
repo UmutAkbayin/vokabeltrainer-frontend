@@ -8,15 +8,13 @@ import germanyFlag from '@/public/germany.png';
 import usFlag from '@/public/united-states.png';
 
 interface LanguageBoardProps {
-  role: string;
+  flag: string;
 }
 
-function LanguageBoard({role}: LanguageBoardProps) {
+function LanguageBoard({flag}: LanguageBoardProps) {
   const direction = useAppSelector((state) => state.direction.value);
   const mode = useAppSelector((state) => state.mode.value);
   const currentVocabulary = useAppSelector((state) => state.vocabulary.value);
-
-  const isUSA = role === 'input' && direction === 'englishToGerman';
 
   return (
     <Box
@@ -29,10 +27,10 @@ function LanguageBoard({role}: LanguageBoardProps) {
     >
       {direction === '' ? null : (
         <Image
-          src={isUSA ? usFlag : germanyFlag}
+          src={flag === 'usa' ? usFlag : germanyFlag}
           width={75}
           height={75}
-          alt={isUSA ? 'USA flag' : 'Germany flag'}
+          alt={flag === 'usa' ? 'USA flag' : 'Germany flag'}
         />
       )}
       <Typography
@@ -42,8 +40,8 @@ function LanguageBoard({role}: LanguageBoardProps) {
           paddingRight: '100px',
         }}
       >
-        {role === 'input' && currentVocabulary?.englishVocabulary}
-        {role === 'output' &&
+        {flag === 'usa' && currentVocabulary?.englishVocabulary}
+        {flag === 'germany' &&
           mode === 'solution' &&
           currentVocabulary?.germanVocabularies?.join(', ')}
       </Typography>

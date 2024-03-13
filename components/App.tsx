@@ -109,8 +109,12 @@ function App() {
       </Typography>
       <Settings />
       <ScoreBoard />
-      <LanguageBoard role="input" />
-      <LanguageBoard role="output" />
+      <LanguageBoard
+        flag={direction === 'englishToGerman' ? 'usa' : 'germany'}
+      />
+      <LanguageBoard
+        flag={direction === 'englishToGerman' ? 'germany' : 'usa'}
+      />
       <TextField
         fullWidth
         id="answer-input"
