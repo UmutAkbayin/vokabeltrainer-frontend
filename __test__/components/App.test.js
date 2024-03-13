@@ -1,5 +1,4 @@
-import {findAllByRole, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '@/components/App';
 import {renderWithProviders} from '@/utils/test-utils';
@@ -52,6 +51,8 @@ describe('default settings', () => {
     };
     renderWithProviders(<App />, state);
 
-    const images = await findAllByRole('img');
+    const images = await screen.findAllByRole('img');
+
+    expect(images).toHaveLength(2);
   });
 });
