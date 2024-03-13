@@ -1,17 +1,13 @@
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
 import './globals.css';
 import Topbar from '@/components/Topbar';
 
 export const metadata: Metadata = {
   title: 'Vocabulary Trainer',
   description: '',
-}
+};
 
-export default function RootLayout({
-  children
-}: {
-    children: React.ReactNode,
-}) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
       <head>
@@ -23,5 +19,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
+  );
 }

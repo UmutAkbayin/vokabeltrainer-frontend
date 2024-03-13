@@ -7,28 +7,29 @@ import styles from '@/styles/App.module.css';
 import Settings from '@/components/Settings';
 import ScoreBoard from './ScoreBoard';
 import LanguageBoard from './LanguageBoard';
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks"; 
-import { fetchVocabularies } from '@/services/fetchVocabularies';
-import { setStatus } from '@/features/status/statusSlice';
-import { setAmount } from '@/features/amount/amountSlice';
-import { setMode } from '@/features/mode/modeSlice';
-import { setAnswer } from '@/features/answer/answerSlice';
-import { incrementCount, resetCount } from '@/features/count/countSlice';
-import { incrementVocabulary, resetVocabulary, setVocabularies }
-  from '@/features/vocabularies/vocabulariesSlice';
-import { setVocabulary } from '@/features/vocabulary/vocabularySlice';
-import { setDirection } from '@/features/direction/directionSlice';
-import { Box, Button, Typography } from '@mui/material';
-import { TextField } from '@mui/material';
+import {useAppDispatch, useAppSelector} from '@/hooks/reduxHooks';
+import {fetchVocabularies} from '@/services/fetchVocabularies';
+import {setStatus} from '@/features/status/statusSlice';
+import {setAmount} from '@/features/amount/amountSlice';
+import {setMode} from '@/features/mode/modeSlice';
+import {setAnswer} from '@/features/answer/answerSlice';
+import {incrementCount, resetCount} from '@/features/count/countSlice';
+import {
+  incrementVocabulary,
+  resetVocabulary,
+  setVocabularies,
+} from '@/features/vocabularies/vocabulariesSlice';
+import {setVocabulary} from '@/features/vocabulary/vocabularySlice';
+import {setDirection} from '@/features/direction/directionSlice';
+import {Box, Button, Typography} from '@mui/material';
+import {TextField} from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SendIcon from '@mui/icons-material/Send';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useRouter } from 'next/navigation';
-
+import {useRouter} from 'next/navigation';
 
 function App() {
-
   const status = useAppSelector((state) => state.status.value);
   const mode = useAppSelector((state) => state.mode.value);
   const count = useAppSelector((state) => state.count.value);
@@ -41,7 +42,7 @@ function App() {
   const router = useRouter();
 
   const dispatch = useAppDispatch();
-  
+
   const handleFetch = async () => {
     try {
       const data = await fetchVocabularies(amount);
@@ -53,10 +54,10 @@ function App() {
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
-  const assert = () => currentVocabulary?.germanVocabularies?.includes(answer) ?
-    true : false;
+  const assert = () =>
+    currentVocabulary?.germanVocabularies?.includes(answer) ? true : false;
 
   const handleAssertion = () => {
     if (assert()) {
@@ -66,7 +67,7 @@ function App() {
     }
     dispatch(setMode('solution'));
     dispatch(incrementCount());
-  }
+  };
 
   const handleNext = (vocs = vocabularies) => {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
@@ -79,7 +80,7 @@ function App() {
     dispatch(setVocabulary(unfinishedVocabularies[random]));
     dispatch(setAnswer(''));
     dispatch(setMode('question'));
-  }
+  };
 
   const handleReset = () => {
     dispatch(setStatus('off'));
@@ -89,28 +90,31 @@ function App() {
     dispatch(setAnswer(''));
     dispatch(setVocabularies([]));
     dispatch(resetCount());
-    dispatch(setVocabulary({
-    id: '',
-    englishVocabulary: '',
-    germanVocabularies: [],
-    step: 0,
-  },));
-  }
+    dispatch(
+      setVocabulary({
+        id: '',
+        englishVocabulary: '',
+        germanVocabularies: [],
+        step: 0,
+      })
+    );
+  };
   return (
     <main className={styles.main}>
       <Typography
         component="h1"
-        sx={{ fontSize: "3rem", fontWeight: 600, fontFamily: "Times New Roman"}}
-      >Vocabulary Trainer
+        sx={{fontSize: '3rem', fontWeight: 600, fontFamily: 'Times New Roman'}}
+      >
+        Vocabulary Trainer
       </Typography>
       <Settings />
       <ScoreBoard />
-      <LanguageBoard role='input' />
-      <LanguageBoard role='output' />
+      <LanguageBoard role="input" />
+      <LanguageBoard role="output" />
       <TextField
         fullWidth
-        id='answer-input'
-        label='Your Answer'
+        id="answer-input"
+        label="Your Answer"
         value={answer}
         onChange={(e) => dispatch(setAnswer(e.target.value))}
         onKeyDown={(e) => {
@@ -120,64 +124,69 @@ function App() {
         }}
         disabled={status === 'off'}
       />
-      <Box sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%",
-      }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
         <Button
-          className='btn-secondary'
-          variant='contained'
-          size='large'
+          className="btn-secondary"
+          variant="contained"
+          size="large"
           startIcon={<RestartAltIcon />}
           sx={{
-            backgroundColor: "var(--light-gray)",
-            color: "var(--primary-color)",
-            "&:hover": {
-              color: "white",
-            }
+            backgroundColor: 'var(--light-gray)',
+            color: 'var(--primary-color)',
+            '&:hover': {
+              color: 'white',
+            },
           }}
           onClick={handleReset}
         >
           Reset
         </Button>
-        <Box sx={{ 
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          fontSize: "1.3rem",
-  }}>
-      {status === 'off' && null}
-          {mode === 'solution' && assert() &&
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            fontSize: '1.3rem',
+          }}
+        >
+          {status === 'off' && null}
+          {mode === 'solution' && assert() && (
             <>
-              <CheckCircleIcon
-                fontSize="large"
-                color="success"
-              />Correct Answer
+              <CheckCircleIcon fontSize="large" color="success" />
+              Correct Answer
             </>
-          }
-          {mode === 'solution' && !assert() && 
+          )}
+          {mode === 'solution' && !assert() && (
             <>
-              <CancelIcon fontSize='large' color='error' />Wrong Answer
+              <CancelIcon fontSize="large" color="error" />
+              Wrong Answer
             </>
-      }
-          
+          )}
         </Box>
         <Button
-            variant='contained'
-            size='large'
-            startIcon={<SendIcon />}
-            onClick={() => {
-            status === 'off' ? handleFetch() : mode === 'solution' ?
-              handleNext() : handleAssertion();
-            }}
-          >
-            {status === 'off' ? 'Start' : 'Submit'}
+          variant="contained"
+          size="large"
+          startIcon={<SendIcon />}
+          onClick={() => {
+            status === 'off'
+              ? handleFetch()
+              : mode === 'solution'
+                ? handleNext()
+                : handleAssertion();
+          }}
+        >
+          {status === 'off' ? 'Start' : 'Submit'}
         </Button>
       </Box>
     </main>
-  )
+  );
 }
 
 export default App;

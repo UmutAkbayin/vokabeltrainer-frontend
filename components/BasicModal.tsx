@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ children } : any) {
+export default function BasicModal({children}: any) {
   const [open, setOpen] = React.useState(true);
   const handleClose = () => setOpen(false);
 
@@ -30,9 +30,7 @@ export default function BasicModal({ children } : any) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          {children}
-        </Box>
+        <Box sx={style}>{children}</Box>
       </Modal>
     </div>
   );

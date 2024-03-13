@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
-import { setAmount } from '@/features/amount/amountSlice';
-import { setDirection } from '@/features/direction/directionSlice';
-import type { Direction } from '@/features/direction/directionSlice';
+import {useAppSelector, useAppDispatch} from '@/hooks/reduxHooks';
+import {setAmount} from '@/features/amount/amountSlice';
+import {setDirection} from '@/features/direction/directionSlice';
+import type {Direction} from '@/features/direction/directionSlice';
 
 import {
   FormControl,
@@ -22,28 +22,30 @@ export default function Settings() {
   const dispatch = useAppDispatch();
 
   return (
-    <Box sx={{
-      width: "100%",
-      display: "flex",
-      justifyContent: "center",
-      gap: "1.5rem",
-    }}>
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '1.5rem',
+      }}
+    >
       <FormControl>
         <InputLabel
           size="small"
-          id={"direction-select-label"}
-          htmlFor={"direction-select"}
+          id={'direction-select-label'}
+          htmlFor={'direction-select'}
         >
           Direction
         </InputLabel>
         <Select
-          defaultValue='englishToGerman'
+          defaultValue="englishToGerman"
           labelId="direction-select-label"
-          inputProps={{ "id": "direction-select"}}
+          inputProps={{id: 'direction-select'}}
           value={direction}
           onChange={(e) => dispatch(setDirection(e.target.value as Direction))}
           label="Direction"
-          sx={{ width: "295px", }}
+          sx={{width: '295px'}}
           size="small"
           disabled={status === 'on'}
         >
@@ -58,7 +60,7 @@ export default function Settings() {
         size="small"
         value={amount}
         onChange={(e) => dispatch(setAmount(e.target.value))}
-        sx={{ width: "120px" }}
+        sx={{width: '120px'}}
         disabled={status === 'on'}
       />
     </Box>

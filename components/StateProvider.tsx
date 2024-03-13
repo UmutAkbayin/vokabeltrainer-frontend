@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import { setupStore } from '@/store';
-import { Provider } from 'react-redux';
+import {setupStore} from '@/store';
+import {Provider} from 'react-redux';
 
 import App from '@/components/App';
 
@@ -12,7 +12,7 @@ function StateProvider() {
     <Provider store={setupStore()}>
       <App />
     </Provider>
-  )
+  );
 }
 
-export default StateProvider
+export default StateProvider;

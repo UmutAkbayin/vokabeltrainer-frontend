@@ -7,7 +7,7 @@ function StatisticsModal() {
     <BasicModal>
       <Statistics />
     </BasicModal>
-  )
+  );
 }
 
 export default StatisticsModal;
