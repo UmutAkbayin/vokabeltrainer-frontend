@@ -37,6 +37,7 @@ export default function Settings() {
           Direction
         </InputLabel>
         <Select
+          defaultValue='englishToGerman'
           labelId="direction-select-label"
           inputProps={{ "id": "direction-select"}}
           value={direction}

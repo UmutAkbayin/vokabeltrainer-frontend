@@ -10,13 +10,13 @@ export default function ScoreBoard() {
   const vocabularies = useAppSelector((state) => state.vocabularies.value);
   
   const baseValue = status === "off" ? 0
-    : vocabularies.filter((voc) => voc.step === 0).length;
+    : vocabularies?.filter((voc) => voc.step === 0).length;
   const step1Value = status === "off" ? 0
-    : vocabularies.filter((voc) => voc.step === 1).length;
+    : vocabularies?.filter((voc) => voc.step === 1).length;
   const step2Value = status === "off" ? 0
-    : vocabularies.filter((voc) => voc.step === 2).length;
+    : vocabularies?.filter((voc) => voc.step === 2).length;
   const doneValue = status === "off" ? 0
-    : vocabularies.filter((voc) => voc.step === 3).length;
+    : vocabularies?.filter((voc) => voc.step === 3).length;
 
   return (
     <Box sx={{

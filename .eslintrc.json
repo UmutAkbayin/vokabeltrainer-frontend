@@ -1,6 +1,22 @@
 {
   "extends": [
+    "eslint:recommended",
+    "prettier",
+    "prettier/react",
     "next/core-web-vitals",
     "plugin:storybook/recommended"
-  ]
+  ],
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  }
 }

@@ -55,7 +55,7 @@ function App() {
     }
   }
 
-  const assert = () => currentVocabulary?.germanVocabularies.includes(answer) ?
+  const assert = () => currentVocabulary?.germanVocabularies?.includes(answer) ?
     true : false;
 
   const handleAssertion = () => {
@@ -70,7 +70,7 @@ function App() {
 
   const handleNext = (vocs = vocabularies) => {
     const unfinishedVocabularies = vocs.filter((voc) => voc.step < 3);
-    if (unfinishedVocabularies.length === 0) {
+    if (unfinishedVocabularies?.length === 0) {
       handleReset();
       router.push(`/result/(..)statistics/?amount=${amount}&count=${count}`);
       return;
