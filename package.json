@@ -52,7 +52,7 @@
     "next-router-mock": "^0.9.12",
     "prettier": "^3.2.5",
     "redux-mock-store": "^1.5.4",
-    "storybook": "^7.6.10",
+    "storybook": "^7.6.20",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }
